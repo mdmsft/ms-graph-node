@@ -1,12 +1,12 @@
 require('isomorphic-fetch');
-const { AzureCliCredential } = require('@azure/identity');
+const { ClientSecretCredential } = require('@azure/identity');
 const { setLogLevel } = require("@azure/logger");
 const { Client } = require('@microsoft/microsoft-graph-client');
 const { TokenCredentialAuthenticationProvider } = require("@microsoft/microsoft-graph-client/authProviders/azureTokenCredentials");
 
 const graphBaseUrl = 'https://graph.microsoft.com/v1.0';
 
-const credential = new AzureCliCredential();
+const credential = new ClientSecretCredential(process-env.TENANT_ID, process.env.CLIENT_ID, process.env.CLIENT_SECRET);
 
 const authProvider = new TokenCredentialAuthenticationProvider(credential, { scopes: 'https://graph.microsoft.com/.default' });
 
