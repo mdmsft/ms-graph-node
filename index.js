@@ -52,5 +52,5 @@ async function createGroup(name) {
 }
 
 if (require.main === module) {
-    createGroup(process.argv[2]).catch(err => console.error(err));
+    createGroup(process.argv[2]).catch(err => { console.error(err); throw err; });
 }
