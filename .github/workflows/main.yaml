@@ -1,0 +1,37 @@
+name: Main
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        required: true
+        description: The name of the group to create
+
+permissions:
+  id-token: write
+
+jobs:
+  poc:
+    name: PoC
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Login with service principal
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '17'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run script
+        run: node index.js ${{ inputs.name}}
