@@ -6,7 +6,7 @@ const { TokenCredentialAuthenticationProvider } = require("@microsoft/microsoft-
 
 const graphBaseUrl = 'https://graph.microsoft.com/v1.0';
 
-const credential = new ClientSecretCredential(process-env.TENANT_ID, process.env.CLIENT_ID, process.env.CLIENT_SECRET);
+const credential = new ClientSecretCredential(process.env.TENANT_ID, process.env.CLIENT_ID, process.env.CLIENT_SECRET);
 
 const authProvider = new TokenCredentialAuthenticationProvider(credential, { scopes: 'https://graph.microsoft.com/.default' });
 
